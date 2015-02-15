@@ -39,7 +39,7 @@ class puppetci {
     'git':;
   }
 
-  #For RVM 
+  #For RVM
   package {
     'gcc-c++':;
     'patch':;
@@ -62,8 +62,7 @@ class puppetci {
   }
 
   class {'jenkins':
-    lts  => 0,
-    repo => 1,
+    configure_firewall => false,
   }
 
   class {'puppetci::plugins':
@@ -72,7 +71,7 @@ class puppetci {
   file {
     '/var/lib/jenkins/org.jenkinsci.plugins.ghprb.GhprbTrigger.xml':
     source => 'puppet:///modules/puppetci/org.jenkinsci.plugins.ghprb.GhprbTrigger.xml',
-    replace => 'no', 
+    replace => 'no',
     owner => 'jenkins',
     group => 'jenkins';
 
@@ -88,7 +87,7 @@ class puppetci {
 
     '/var/lib/jenkins/jobs/PuppetCI/config.xml':
       ensure => file,
-      replace => 'no', 
+      replace => 'no',
       source => 'puppet:///modules/puppetci/config.xml',
       owner => 'jenkins',
       group => 'jenkins';
